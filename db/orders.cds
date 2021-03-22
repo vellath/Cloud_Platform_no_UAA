@@ -14,5 +14,5 @@ entity "CUSTOMER_V"
 		CITY       : String(50);
 		STATE      : String(20);
 		COUNTRY    : String(20);
-		POSTALCODE : String(10);
+		POSTALCODE : String(11);
 }  
