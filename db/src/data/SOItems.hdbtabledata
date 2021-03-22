@@ -1,0 +1,30 @@
+{
+	"format_version": 1,
+	"imports": [{
+		"target_table": "SOITEMS",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "SOitems.csv",
+			"has_header": false,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ","
+			}
+		},
+		"column_mappings": {
+			"SOHEADER": 1,
+			"PRODUCT": 2,
+			"CURRENCY": 3,
+			"GROSSAMOUNT": 4
+		},
+		"import_settings": {
+			"include_filter": [],
+			"import_columns": [
+				"SOHEADER",
+				"PRODUCT",
+				"CURRENCY",
+				"GROSSAMOUNT"
+			]
+		}
+	}]
+}

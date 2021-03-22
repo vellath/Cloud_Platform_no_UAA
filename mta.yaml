@@ -1,0 +1,73 @@
+ID: cloudPlatform
+_schema-version: '2.1'
+description: cloudPlatform Project
+version: 0.0.1
+modules:
+  - name: clouddb
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 512M
+    requires:
+      - name: cloudPlatform-db-hdi-container
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
+  - name: srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 512M
+    provides:
+      - name: srv_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cloudPlatform-db-hdi-container
+      - name: clouddb
+  - name: web
+    type: html5
+    path: web
+    requires:
+      - name: xsjs_api
+        group: destinations
+        properties:
+          name: xsjs_api
+          url: '~{url}'
+          forwardAuthToken: false
+      - name: srv_api
+        group: destinations
+        properties:
+          name: srv_api
+          url: '~{url}'
+          forwardAuthToken: false
+  - name: java
+    type: java
+    path: java
+    parameters:
+      memory: 512M
+    provides:
+      - name: java_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cloudPlatform-db-hdi-container
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]'
+      - name: clouddb
+  - name: xsjs
+    type: nodejs
+    path: xsjs
+    provides:
+      - name: xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cloudPlatform-db-hdi-container
+      - name: clouddb
+resources:
+  - name: cloudPlatform-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: '${service-name}'
