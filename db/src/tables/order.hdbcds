@@ -1,0 +1,32 @@
+/*@@layout{"layoutInfo":{"x":-271.017578125,"y":-101}}*/
+@odata.publish : true
+context OTC {
+
+    /*@@layout{"layoutInfo":{"x":-2386.5,"y":-871}}*/
+    type t_Name : String(50);
+
+    /*@@layout{"layoutInfo":{"x":-2637.345703125,"y":-874.5}}*/
+    type str_Address {
+        Street     : String(50);
+        City       : String(50);
+        State      : String(20);
+        Country    : String(20);
+        PostalCode : String(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2568,"y":-648.5}}*/
+    entity Customer {
+        key ID     : Integer;
+            Name   : OTC.t_Name;
+            Office : OTC.str_Address;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2969,"y":-692.5,"external":[{"id":"Customer","sourceName":"custID"},{"id":"Customer","sourceName":"Material"},{"id":"Customer","sourceName":"Unit"},{"id":"Customer","sourceName":"Amount"}]}}*/
+    entity SOrder {
+        key ID       : Integer;
+            custID   : association[0..1] to Customer { ID };
+            Material : String(25);
+            Unit     : String(3);
+            Amount   : Decimal(10, 2);
+    };
+};

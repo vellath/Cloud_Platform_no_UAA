@@ -1,0 +1,9 @@
+service {
+	"OTC.SOrder"
+	as "Order" navigates ("Customer" as "Customer");
+	
+	"OTC.Customer" as "Customer";
+	
+	association "Customer"  principal "Order"("custID.ID")
+	multiplicity "*" dependent "Customer"("ID") multiplicity "1";
+}

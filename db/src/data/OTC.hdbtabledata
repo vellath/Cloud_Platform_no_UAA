@@ -1,0 +1,42 @@
+{
+	"format_version": 1,
+	"imports": [{
+			"target_table": "OTC.Customer",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "customers.csv",
+				"has_header": true
+			},
+			"import_settings": {
+				"include_filter": [],
+				"import_columns": [
+					"ID",
+					"Name",
+					"Office.Street",
+					"Office.City",
+					"Office.State",
+					"Office.Country",
+					"Office.PostalCode"
+				]
+			}
+		}, {
+			"target_table": "OTC.SOrder",
+			"source_data": {
+				"data_type": "CSV",
+				"file_name": "oders.csv",
+				"has_header": true
+			},
+			"import_settings": {
+				"include_filter": [],
+				"import_columns": [
+					"ID",
+					"custID.ID",
+					"Material",
+					"Unit",
+					"Amount"
+				]
+			}
+		}
+
+	]
+}

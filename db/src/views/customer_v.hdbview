@@ -1,0 +1,10 @@
+VIEW "CUSTOMER_V" as SELECT 
+	"ID" as CUSTID,
+	"Name" AS NAME,
+	"Office.Street" as STREET,
+	"Office.City" as CITY,
+	"Office.State" as STATE,
+	"Office.Country" as COUNTRY,
+	"Office.PostalCode" as POSTALCODE
+FROM "OTC.Customer";
+
